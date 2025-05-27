@@ -1,11 +1,15 @@
 package com.aprimorapring.aprimora.config;
 
+import java.math.BigDecimal;
+
 import com.aprimorapring.aprimora.entities.Category;
 import com.aprimorapring.aprimora.entities.Order;
+import com.aprimorapring.aprimora.entities.Product;
 import com.aprimorapring.aprimora.entities.User;
 import com.aprimorapring.aprimora.entities.enums.OrderStatus;
 import com.aprimorapring.aprimora.repositories.CategoryRepository;
 import com.aprimorapring.aprimora.repositories.OrderRepository;
+import com.aprimorapring.aprimora.repositories.ProductRepository;
 import com.aprimorapring.aprimora.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -27,6 +31,9 @@ public class TestConfig implements CommandLineRunner {
 
     @Autowired
     private CategoryRepository categoryRepository;
+
+    @Autowired
+    private ProductRepository productRepository;
 
     @Override
     public void run(String... args) {
@@ -89,5 +96,47 @@ public class TestConfig implements CommandLineRunner {
                 .build();
 
         categoryRepository.saveAll(Arrays.asList(cat1, cat2, cat3));
+
+        Product p1 = new Product().builder()
+                .id(null)
+                .tipo("The Lord of the Rings")
+                .nome("Lorem ipsum dolor sit amet, consectetur.")
+                .valor(new BigDecimal("90.5"))
+                .descricao("")
+                .build();
+
+        Product p2 = new Product().builder()
+                .id(null)
+                .tipo("Smart TV")
+                .nome("Nulla eu imperdiet purus. Maecenas ante.")
+                .valor(new BigDecimal("2190.0"))
+                .descricao("")
+                .build();
+
+        Product p3 = new Product().builder()
+                .id(null)
+                .tipo("Macbook Pro")
+                .nome("Nam eleifend maximus tortor, at mollis.")
+                .valor(new BigDecimal("1250.0"))
+                .descricao("")
+                .build();
+
+        Product p4 = new Product().builder()
+                .id(null)
+                .tipo("PC Gamer")
+                .nome("Donec aliquet odio ac rhoncus cursus.")
+                .valor(new BigDecimal("1200.0"))
+                .descricao("")
+                .build();
+
+        Product p5 = new Product().builder()
+                .id(null)
+                .tipo("Rails for Dummies")
+                .nome("Cras fringilla convallis sem vel faucibus.")
+                .valor(new BigDecimal("100.99"))
+                .descricao("")
+                .build();
+
+        productRepository.saveAll(Arrays.asList(p1, p2, p3, p4, p5));
     }
 }
