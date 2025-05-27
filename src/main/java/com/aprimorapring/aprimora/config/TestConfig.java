@@ -1,8 +1,10 @@
 package com.aprimorapring.aprimora.config;
 
+import com.aprimorapring.aprimora.entities.Category;
 import com.aprimorapring.aprimora.entities.Order;
 import com.aprimorapring.aprimora.entities.User;
 import com.aprimorapring.aprimora.entities.enums.OrderStatus;
+import com.aprimorapring.aprimora.repositories.CategoryRepository;
 import com.aprimorapring.aprimora.repositories.OrderRepository;
 import com.aprimorapring.aprimora.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,9 @@ public class TestConfig implements CommandLineRunner {
 
     @Autowired
     private OrderRepository orderRepository;
+
+    @Autowired
+    private CategoryRepository categoryRepository;
 
     @Override
     public void run(String... args) {
@@ -67,5 +72,22 @@ public class TestConfig implements CommandLineRunner {
                 .build();
 
         orderRepository.saveAll(Arrays.asList(o1, o2, o3));
+
+        Category cat1 = new Category().builder()
+                .id(null)
+                .name("Electronics")
+                .build();
+
+        Category cat2 = new Category().builder()
+                .id(null)
+                .name("Books")
+                .build();
+
+        Category cat3 = new Category().builder()
+                .id(null)
+                .name("Computers")
+                .build();
+
+        categoryRepository.saveAll(Arrays.asList(cat1, cat2, cat3));
     }
 }
