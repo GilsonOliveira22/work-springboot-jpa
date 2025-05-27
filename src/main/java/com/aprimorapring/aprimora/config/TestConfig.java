@@ -2,6 +2,7 @@ package com.aprimorapring.aprimora.config;
 
 import com.aprimorapring.aprimora.entities.Order;
 import com.aprimorapring.aprimora.entities.User;
+import com.aprimorapring.aprimora.entities.enums.OrderStatus;
 import com.aprimorapring.aprimora.repositories.OrderRepository;
 import com.aprimorapring.aprimora.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,18 +49,21 @@ public class TestConfig implements CommandLineRunner {
                 .id(null)
                 .moment(Instant.parse("2019-06-20T19:53:07Z"))
                 .client(u1)
+                .orderStatus(OrderStatus.WAITING_PAYMENT.getCode())
                 .build();
 
         Order o2 = new Order().builder()
                 .id(null)
                 .moment(Instant.parse("2019-07-21T03:42:10Z"))
                 .client(u2)
+                .orderStatus(OrderStatus.PAID.getCode())
                 .build();
 
         Order o3 = new Order().builder()
                 .id(null)
                 .moment(Instant.parse("2019-07-22T15:21:22Z"))
                 .client(u1)
+                .orderStatus(OrderStatus.SHIPPED.getCode())
                 .build();
 
         orderRepository.saveAll(Arrays.asList(o1, o2, o3));
