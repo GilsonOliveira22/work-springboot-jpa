@@ -1,7 +1,5 @@
 package com.aprimorapring.aprimora.config;
 
-import java.math.BigDecimal;
-
 import com.aprimorapring.aprimora.entities.Category;
 import com.aprimorapring.aprimora.entities.Order;
 import com.aprimorapring.aprimora.entities.Product;
@@ -37,6 +35,70 @@ public class TestConfig implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
+        Category cat1 = new Category().builder()
+                .id(null)
+                .name("Electronics")
+                .build();
+
+        Category cat2 = new Category().builder()
+                .id(null)
+                .name("Books")
+                .build();
+
+        Category cat3 = new Category().builder()
+                .id(null)
+                .name("Computers")
+                .build();
+
+        Product p1 = new Product().builder()
+                .id(null)
+                .name("The Lord of the Rings")
+                .description("Lorem ipsum dolor sit amet, consectetur.")
+                .price(90.5)
+                .imgUrl("")
+                .build();
+
+        Product p2 = new Product().builder()
+                .id(null)
+                .name("Smart TV")
+                .description("Nulla eu imperdiet purus. Maecenas ante.")
+                .price(2190.0)
+                .imgUrl("")
+                .build();
+
+        Product p3 = new Product().builder()
+                .id(null)
+                .name("Macbook Pro")
+                .description("Nam eleifend maximus tortor, at mollis.")
+                .price(1250.0)
+                .imgUrl("")
+                .build();
+
+        Product p4 = new Product().builder()
+                .id(null)
+                .name("PC Gamer")
+                .description("Donec aliquet odio ac rhoncus cursus.")
+                .price(1200.0)
+                .imgUrl("")
+                .build();
+
+        Product p5 = new Product().builder()
+                .id(null)
+                .name("Rails for Dummies")
+                .description("Cras fringilla convallis sem vel faucibus.")
+                .price(100.99)
+                .imgUrl("")
+                .build();
+        categoryRepository.saveAll(Arrays.asList(cat1, cat2, cat3));
+        productRepository.saveAll(Arrays.asList(p1, p2, p3, p4, p5));
+
+        p1.getCategories().add(cat2);
+        p2.getCategories().add(cat1);
+        p2.getCategories().add(cat3);
+        p3.getCategories().add(cat3);
+        p4.getCategories().add(cat3);
+        p5.getCategories().add(cat2);
+        productRepository.saveAll(Arrays.asList(p1, p2, p3, p4, p5));
 
         User u1 = new User().builder()
                 .id(null)
@@ -79,64 +141,5 @@ public class TestConfig implements CommandLineRunner {
                 .build();
 
         orderRepository.saveAll(Arrays.asList(o1, o2, o3));
-
-        Category cat1 = new Category().builder()
-                .id(null)
-                .name("Electronics")
-                .build();
-
-        Category cat2 = new Category().builder()
-                .id(null)
-                .name("Books")
-                .build();
-
-        Category cat3 = new Category().builder()
-                .id(null)
-                .name("Computers")
-                .build();
-
-        categoryRepository.saveAll(Arrays.asList(cat1, cat2, cat3));
-
-        Product p1 = new Product().builder()
-                .id(null)
-                .tipo("The Lord of the Rings")
-                .nome("Lorem ipsum dolor sit amet, consectetur.")
-                .valor(new BigDecimal("90.5"))
-                .descricao("")
-                .build();
-
-        Product p2 = new Product().builder()
-                .id(null)
-                .tipo("Smart TV")
-                .nome("Nulla eu imperdiet purus. Maecenas ante.")
-                .valor(new BigDecimal("2190.0"))
-                .descricao("")
-                .build();
-
-        Product p3 = new Product().builder()
-                .id(null)
-                .tipo("Macbook Pro")
-                .nome("Nam eleifend maximus tortor, at mollis.")
-                .valor(new BigDecimal("1250.0"))
-                .descricao("")
-                .build();
-
-        Product p4 = new Product().builder()
-                .id(null)
-                .tipo("PC Gamer")
-                .nome("Donec aliquet odio ac rhoncus cursus.")
-                .valor(new BigDecimal("1200.0"))
-                .descricao("")
-                .build();
-
-        Product p5 = new Product().builder()
-                .id(null)
-                .tipo("Rails for Dummies")
-                .nome("Cras fringilla convallis sem vel faucibus.")
-                .valor(new BigDecimal("100.99"))
-                .descricao("")
-                .build();
-
-        productRepository.saveAll(Arrays.asList(p1, p2, p3, p4, p5));
     }
 }
