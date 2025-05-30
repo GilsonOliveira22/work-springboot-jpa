@@ -34,4 +34,10 @@ public class UserController {
         URI uri = URI.create(String.format("/users/%d", insert.getId()));
         return ResponseEntity.created(uri).body(insert);
     }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Void> delet(@PathVariable Long id) {
+        service.delete(id);
+        return ResponseEntity.noContent().build();
+    }
 }
