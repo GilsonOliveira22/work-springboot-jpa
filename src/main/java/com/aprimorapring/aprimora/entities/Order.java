@@ -41,5 +41,9 @@ public class Order implements Serializable {
 
     @OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
     private Payment payment;
+
+    public double getTotal() {
+        return items.stream().mapToDouble(OrderItem::getSubTotal).sum();
+    }
 }
 
