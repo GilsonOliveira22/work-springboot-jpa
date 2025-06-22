@@ -15,16 +15,16 @@ public class ResourceExceptionHandler extends RuntimeException {
 
     @ExceptionHandler(ResourceNotFoundException.class)
     public ResponseEntity<StandardError> resourceNotFound(ResourceNotFoundException e, HttpServletRequest request) {
-        String erro = "Resource not found for ";
-        HttpStatus status = HttpStatus.NOT_FOUND;
-        StandardError err = new StandardError(Instant.now(), status.value(), erro, e.getMessage(), request.getRequestURI());
-        return ResponseEntity.status(status).body(err);
+        return getStandardErrorResponseEntity(e, request, "Resource not found for ", HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(DatabaseException.class)
     public ResponseEntity<StandardError> dataBase(DatabaseException e, HttpServletRequest request) {
-        String erro = "Database error ";
-        HttpStatus status = HttpStatus.BAD_REQUEST;
+        return getStandardErrorResponseEntity(e, request, "Database error", HttpStatus.BAD_REQUEST);
+    }
+
+    private static ResponseEntity<StandardError> getStandardErrorResponseEntity(Exception e, HttpServletRequest request,
+                                                                                String erro, HttpStatus status) {
         StandardError err = new StandardError(Instant.now(), status.value(), erro, e.getMessage(), request.getRequestURI());
         return ResponseEntity.status(status).body(err);
     }
